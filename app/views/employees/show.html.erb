@@ -1,8 +1,47 @@
 <h1 class='inline'>Showing One Employee</h1>
-<%= link_to 'All Employees', employees_path %>
-<table class="table table-striped table-hover">
-	<%= render partial: 'table_header' %>
+<h3><%= link_to 'All Employees', employees_path %></h3>
+
+<%= button_to 'edit', edit_employee_path(@employee),
+			 			class: 'btn btn-primary btn-small', method: :get %></td>
+<h2>Name: <%= @employee.name %></h2>
+
+<%= image_tag @employee.profile.photo.url %>
+<!-- 	content            :text
+	#  birthday           :date
+	#  created_at         :datetime         not null
+	#  updated_at         :datetime         not null
+	#  height             :integer
+	#  age                :integer
+	#  salary             :integer
+	#  favorite_food      :string(255)
+	#  favorite_day       :string(255) -->
+
+<p><strong>Position:</strong> <%= @employee.position %></p>
+<p><strong>Supervisor:</strong> <%= @employee.supervisor.try(:name) %></p>
+<br>
+
+<h5>Dossier</h5>
+<div class='well'>
+	<p><%= @employee.profile.try(:content) %></p>
+</div>
+
+<table class='table'>
+	<thead>
+		<tr>
+			<th>Height</th>
+			<th>Age</th>
+			<th>Favorite Food</th>
+			<th>Favorite Day</th>
+			<th>Birthday</th>
+		</tr>
+	</thead>
 	<tbody>
-		<%= render partial: 'employee', object: @employee %>
+		<tr>
+			<td><%= @employee.profile.height %></td>
+			<td><%= @employee.profile.age %></td>
+			<td><%= @employee.profile.favorite_food %></td>
+			<td><%= @employee.profile.favorite_day %></td>
+			<td><%= @employee.profile.birthday %></td>												
+		</tr>	
 	</tbody>
 </table>

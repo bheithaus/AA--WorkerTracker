@@ -7,15 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<header class="navbar">
-		<nav>
-			<ul class='nav pull-right'>
-				<li><%= link_to 'Employees', employees_path %></li>
-				<li><%= link_to 'Teams', teams_path %></li>
-			</ul>
-		</nav>
+	<header class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<nav>
+					<ul class='nav pull-right'>
+						<li><%= link_to 'Employees', employees_path %></li>
+						<li><%= link_to 'Teams', teams_path %></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 	</header>
 	<div class="container">
+		<%= render partial: 'shared/flash_messages' %>
 		<%= yield %>
 	</div>
 

@@ -1,4 +1,4 @@
-<%= form_for(@employee) do |f| %>
+<%= form_for(@employee, :html => { :multipart => true }) do |f| %>
 	<%= render partial: 'shared/errors', object: @employee.errors %>
 
 	<%= f.label :name %>
@@ -11,23 +11,57 @@
 	<!-- hmm do I want to be able to add subordinates? -->
 	<h5>Supervisor</h5>
 	<%= f.collection_select :supervisor_id, Employee.all, :id, :name, include_blank: true %>
-	
-	<!-- <%# Employee.all.each do |employee| %>
+	<!--Old radio button option <%# Employee.all.each do |employee| %>
 		<label><%#= employee.name %>
 			<%#= radio_button_tag 'employee[supervisor_id]', employee.id %>
 		</label>
 	<%# end %>	 -->
+	<h5>Assign to Teams</h5>
+	<% Team.all.each do |team| %>
+		<label><%= team.name %>
+			<%= check_box_tag(
+							'employee[team_ids][]',
+							team.id,
+							@employee.team_ids.include?(team.id)	
+			)%>
+		</label>
+	<% end %>
+	<%= hidden_field_tag 'employee[team_ids][]', '' %>
 	<br>
 	
 	<%= f.fields_for(:profile) do |pf| %>
+		<%= pf.label :salary %>
+		<%= pf.text_field :salary %>
+		<br>
+		
 		<%= pf.label :content, 'Profile Content' %>
 		<%= pf.text_area :content, rows: '10', class: 'span6' %>
+		<br>
+		<%= pf.label :height, 'Height in inches' %>
+		<%= pf.text_field :height %>
+		<br>
+		
+		<%= pf.label :age %>
+		<%= pf.text_field :age %>
+		<br>
+		
+		<%= pf.label :favorite_food %>
+		<%= pf.text_field :favorite_food %>
+		<br>
+		
+		<%= pf.label :favorite_day %>
+		<%= pf.text_field :favorite_day %>
+		<br>
+		
+		<h6>Upload Photo or enter url</h6>
+		<label>Upload
+			<%= pf.file_field :photo %>
+		</label>
 		<br>
 		
 		<%= pf.label :birthday %>
 		<%= pf.date_select :birthday, start_year: Time.now.year - 100,
 			 				end_year: Time.now.year - 18 %>
-		
 	<% end %>
 	
 	<%= f.submit %>

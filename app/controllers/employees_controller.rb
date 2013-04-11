@@ -25,7 +25,7 @@ class EmployeesController < ApplicationController
   
   def edit
     @employee = Employee.find(params[:id])
-    @employee.build_profile
+    @employee.build_profile if @employee.profile.nil?
   end
   
   def update

@@ -5,4 +5,6 @@
 	<td><%= employee.position %></td>
 	<td><%= employee.profile.try(:content) %></td>
 	<td><%= employee.supervisor.try(:name) %></td>
+	<td><%= button_to 'fire', employee_path(employee),
+			 			class: 'btn btn-danger btn-mini', method: :delete, confirm: 'are you sure?' %></td>
 </tr>

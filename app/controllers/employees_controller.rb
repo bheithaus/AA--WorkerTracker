@@ -1,5 +1,4 @@
 class EmployeesController < ApplicationController
-  
   def index
     @employees = Employee.all
   end
@@ -38,5 +37,9 @@ class EmployeesController < ApplicationController
     end
   end
   
-  
+  def destroy
+    employee = Employee.find(params[:id]).destroy
+    flash[:notice] = "You have fired #{employee.name}"
+    redirect_to :back
+  end
 end

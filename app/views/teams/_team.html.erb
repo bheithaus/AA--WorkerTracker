@@ -5,7 +5,7 @@
 					class: 'btn btn-primary btn-mini', method: :get %>
 <% end %>
 
-<h5>SupaVisa: <%= team.supervisor.name %></h5>
+<h5>SupaVisa: <%= team.supervisor.try(:name) %></h5>
 <h4>All Members</h4>
 <table class="table">
 	<tr>

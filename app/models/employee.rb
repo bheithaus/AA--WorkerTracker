@@ -7,5 +7,5 @@ class Employee < ActiveRecord::Base
   has_many :team_memberships
   has_many :teams, through: :team_memberships
 
-  has_many :supervised_teams, class_name: 'Team', inverse_of: :supervisor
+  has_many :supervised_teams, class_name: 'Team', foreign_key: :supervisor_id, inverse_of: :supervisor
 end

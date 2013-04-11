@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411212351) do
+ActiveRecord::Schema.define(:version => 20130411220231) do
 
   create_table "employee_profiles", :force => true do |t|
     t.integer  "employee_id",        :null => false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130411212351) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "online_photo_url"
   end
 
   add_index "employee_profiles", ["employee_id"], :name => "index_employee_profiles_on_employee_id"

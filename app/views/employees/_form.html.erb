@@ -1,69 +1,85 @@
 <%= form_for(@employee, :html => { :multipart => true }) do |f| %>
 	<%= render partial: 'shared/errors', object: @employee.errors %>
-
-	<%= f.label :name %>
-	<%= f.text_field :name %>
-	<br><br>
-	
-	<%= f.label :position %>
-	<%= f.text_field :position %>
-	<br>
-	<!-- hmm do I want to be able to add subordinates? -->
-	<h5>Supervisor</h5>
-	<%= f.collection_select :supervisor_id, Employee.all, :id, :name, include_blank: true %>
-	<!--Old radio button option <%# Employee.all.each do |employee| %>
-		<label><%#= employee.name %>
-			<%#= radio_button_tag 'employee[supervisor_id]', employee.id %>
-		</label>
-	<%# end %>	 -->
-	<h5>Assign to Teams</h5>
-	<% Team.all.each do |team| %>
-		<label><%= team.name %>
-			<%= check_box_tag(
-							'employee[team_ids][]',
-							team.id,
-							@employee.team_ids.include?(team.id)	
-			)%>
-		</label>
-	<% end %>
-	<%= hidden_field_tag 'employee[team_ids][]', '' %>
-	<br>
-	
+	<table class='table'>
+		<tr>
+			<td>
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+			</td>
+			<td>
+				<%= f.label :position %>
+				<%= f.text_field :position %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h5>Supervisor</h5>
+				<%= f.collection_select :supervisor_id, Employee.all, :id, :name, include_blank: true %>
+			</td>
+			<td>
+				<h5>Assign to Teams</h5>
+				<% Team.all.each do |team| %>
+					<label><%= team.name %>
+						<%= check_box_tag(
+										'employee[team_ids][]',
+										team.id,
+										@employee.team_ids.include?(team.id)	
+						)%>
+					</label>
+				<% end %>
+				<%= hidden_field_tag 'employee[team_ids][]', '' %>
+			</td>
+		</tr>
+	</table>
 	<%= f.fields_for(:profile) do |pf| %>
-		<%= pf.label :salary %>
-		<%= pf.text_field :salary %>
-		<br>
-		
-		<%= pf.label :content, 'Profile Content' %>
-		<%= pf.text_area :content, rows: '10', class: 'span6' %>
-		<br>
-		<%= pf.label :height, 'Height in inches' %>
-		<%= pf.text_field :height %>
-		<br>
-		
-		<%= pf.label :age %>
-		<%= pf.text_field :age %>
-		<br>
-		
-		<%= pf.label :favorite_food %>
-		<%= pf.text_field :favorite_food %>
-		<br>
-		
-		<%= pf.label :favorite_day %>
-		<%= pf.text_field :favorite_day %>
-		<br>
-		
-		<h6>Upload Photo or enter url</h6>
-		<label>Upload
-			<%= pf.file_field :photo %>
-		</label>
-		<br>
-		
-		<%= pf.label :birthday %>
-		<%= pf.date_select :birthday, start_year: Time.now.year - 100,
-			 				end_year: Time.now.year - 18 %>
+	<table class='table'>
+		<tr>
+			<td>
+				<h5>Profile Details</h5>
+					<%= pf.label :salary %>
+					<%= pf.text_field :salary %>
+			</td>
+			<td>
+					<%= pf.label :height, 'Height in inches' %>
+					<%= pf.text_field :height %>
+			</td>
+			<td>
+					<%= pf.label :content, 'Profile Content' %>
+					<%= pf.text_area :content, rows: '10', class: 'span6' %>
+			</td>
+		<tr>
+			<td>		
+					<%= pf.label :age %>
+					<%= pf.text_field :age %>
+			</td>
+			<td>
+					<%= pf.label :favorite_food %>
+					<%= pf.text_field :favorite_food %>
+			</td>
+			<td>
+					<%= pf.label :favorite_day %>
+					<%= pf.text_field :favorite_day %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+					<h6>Upload Photo or enter URL (choose one)</h6>
+					<label>Upload
+						<%= pf.file_field :photo %>
+					</label>
+					<label>Enter a URL of online photo
+						<%= pf.text_field :online_photo_url %>
+					</label>
+			</td>
+			<td>
+					<%= pf.label :birthday %>
+					<%= pf.date_select :birthday, start_year: Time.now.year - 100,
+						 				end_year: Time.now.year - 18 %>
+			</td>
+		</tr>
+	</table>
 	<% end %>
 	
-	<%= f.submit %>
+	<%= f.submit class: 'btn' %>
 
 <% end %>

@@ -1,0 +1,7 @@
+<% if @employee.profile.photo.url == "/photos/original/missing.png" && @employee.profile.online_photo_url.nil? %>
+	<p>no photo yet</p>
+<% elsif @employee.profile.photo.url == "/photos/original/missing.png" %>
+	<%= image_tag @employee.profile.online_photo_url %>
+<% else %>
+	<%= image_tag @employee.profile.photo.url %>
+<% end %>

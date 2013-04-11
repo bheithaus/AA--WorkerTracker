@@ -17,12 +17,13 @@
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  online_photo_url   :string(255)
 #
 
 class EmployeeProfile < ActiveRecord::Base
   attr_accessible :birthday, :content, :employee_id,
                   :height, :age, :salary, :favorite_food, :favorite_day,
-                  :photo
+                  :photo, :online_photo_url
                   
   has_attached_file :photo
   

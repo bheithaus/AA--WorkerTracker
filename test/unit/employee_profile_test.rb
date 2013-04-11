@@ -17,6 +17,7 @@
 #  photo_content_type :string(255)
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
+#  online_photo_url   :string(255)
 #
 
 require 'test_helper'

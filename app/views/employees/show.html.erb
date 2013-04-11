@@ -5,16 +5,7 @@
 			 			class: 'btn btn-primary btn-small', method: :get %></td>
 <h2>Name: <%= @employee.name %></h2>
 
-<%= image_tag @employee.profile.photo.url %>
-<!-- 	content            :text
-	#  birthday           :date
-	#  created_at         :datetime         not null
-	#  updated_at         :datetime         not null
-	#  height             :integer
-	#  age                :integer
-	#  salary             :integer
-	#  favorite_food      :string(255)
-	#  favorite_day       :string(255) -->
+<%= render partial: 'photo' %>
 
 <p><strong>Position:</strong> <%= @employee.position %></p>
 <p><strong>Supervisor:</strong> <%= @employee.supervisor.try(:name) %></p>

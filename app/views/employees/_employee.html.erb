@@ -1,0 +1,8 @@
+<tr>
+	<td><%= button_to 'edit', edit_employee_path(employee),
+			 			class: 'btn btn-primary btn-mini', method: :get %></td>
+	<td><%= link_to employee.name, employee_path(employee) %></td>
+	<td><%= employee.position %></td>
+	<td><%= employee.profile.try(:content) %></td>
+	<td><%= employee.supervisor.try(:name) %></td>
+</tr>

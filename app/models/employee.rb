@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  attr_accessible :email, :name, :position, :supervisor_id
+  attr_accessible :email, :name, :position, :supervisor_id, :profile_attributes
 
   belongs_to :supervisor, class_name: 'Employee', inverse_of: :subordinates
   has_many :subordinates, class_name: 'Employee', foreign_key: :supervisor_id, inverse_of: :supervisor
@@ -10,4 +10,8 @@ class Employee < ActiveRecord::Base
   has_many :supervised_teams, class_name: 'Team', foreign_key: :supervisor_id, inverse_of: :supervisor
 
   has_one :profile, class_name: 'EmployeeProfile', inverse_of: :employee
+  
+  accepts_nested_attributes_for :profile
+  
+  validates :name, presence: true
 end

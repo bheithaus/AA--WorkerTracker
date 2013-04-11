@@ -1,0 +1,21 @@
+<h2><%= team.name %></h2>
+<% multi ||= false%>
+<% if multi %>
+	<%= button_to 'edit', edit_team_path(team),
+					class: 'btn btn-primary btn-mini', method: :get %>
+<% end %>
+
+<h5>SupaVisa: <%= team.supervisor.name %></h5>
+<h4>All Members</h4>
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Position</th>
+	</tr>
+	<% team.members.each do |member| %>
+	<tr>
+		<td><%= member.name %></td>
+		<td><%= member.position %></td>
+	</tr>
+	<% end %>
+</table>

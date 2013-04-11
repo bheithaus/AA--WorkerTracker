@@ -7,8 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+	<header class="navbar">
+		<nav>
+			<ul class='nav pull-right'>
+				<li><%= link_to 'Employees', employees_path %></li>
+				<li><%= link_to 'Teams', teams_path %></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<%= yield %>
+	</div>
 
 </body>
 </html>

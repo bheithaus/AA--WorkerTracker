@@ -1,0 +1,35 @@
+<%= form_for(@employee) do |f| %>
+	<%= render partial: 'shared/errors', object: @employee.errors %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	<br><br>
+	
+	<%= f.label :position %>
+	<%= f.text_field :position %>
+	<br>
+	<!-- hmm do I want to be able to add subordinates? -->
+	<h5>Supervisor</h5>
+	<%= f.collection_select :supervisor_id, Employee.all, :id, :name, include_blank: true %>
+	
+	<!-- <%# Employee.all.each do |employee| %>
+		<label><%#= employee.name %>
+			<%#= radio_button_tag 'employee[supervisor_id]', employee.id %>
+		</label>
+	<%# end %>	 -->
+	<br>
+	
+	<%= f.fields_for(:profile) do |pf| %>
+		<%= pf.label :content, 'Profile Content' %>
+		<%= pf.text_area :content, rows: '10', class: 'span6' %>
+		<br>
+		
+		<%= pf.label :birthday %>
+		<%= pf.date_select :birthday, start_year: Time.now.year - 100,
+			 				end_year: Time.now.year - 18 %>
+		
+	<% end %>
+	
+	<%= f.submit %>
+
+<% end %>

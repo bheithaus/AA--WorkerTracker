@@ -1,8 +1,12 @@
 <h2><%= team.name %></h2>
 <% multi ||= false%>
 <% if multi %>
-	<%= button_to 'edit', edit_team_path(team),
-					class: 'btn btn-primary btn-mini', method: :get %>
+<p>
+	<a href='<%= edit_team_path(team) %>' class='btn btn-primary btn-small'>edit</a>
+	<%= link_to team_path(team), method: :delete, confirm: 'are you sure?' do %>
+		<i class='icon-remove'></i>
+	<% end %>
+</p>										
 <% end %>
 
 <h5>SupaVisa: <%= team.supervisor.try(:name) %></h5>

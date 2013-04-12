@@ -34,4 +34,10 @@ class TeamsController < ApplicationController
       render :edit
     end
   end
+  
+  def destroy
+    team = Team.find(params[:id]).destroy
+    flash[:notice] = "Obliterated Team, #{team.name}"
+    redirect_to :back
+  end
 end
